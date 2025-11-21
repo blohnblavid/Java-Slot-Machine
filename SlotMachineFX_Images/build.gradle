@@ -1,0 +1,29 @@
+plugins {
+  id 'application'
+  id 'org.openjfx.javafxplugin' version '0.1.0'
+}
+
+repositories { mavenCentral() }
+
+javafx {
+  version = '21.0.5'
+  modules = ['javafx.controls','javafx.graphics','javafx.base']
+}
+
+application {
+  mainClass = 'app.Main'
+}
+
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(21)
+  }
+}
+
+// macOS stability flags for Glass/Prism
+tasks.named('run') {
+  jvmArgs += [
+    '-Dprism.order=sw',
+    '-Dglass.disableGrab=true'
+  ]
+}

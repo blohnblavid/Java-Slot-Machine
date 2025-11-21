@@ -1,0 +1,22 @@
+.root, .game-root, .shop-root {
+    -fx-font-family: "Showcard Gothic";
+}
+
+.root, .game-root, .shop-root {
+    -fx-background-color:
+        radial-gradient(center 50% 110%, radius 120%, rgba(0,0,0,0.55) 0%, transparent 100%),
+        linear-gradient(from 0% 0% to 0% 100%, rgba(255,215,0,0.08) 0%, rgba(0,0,0,0.18) 100%),
+        linear-gradient(from 0% 0% to 0% 100%, #0b1d14 0%, #0f2a1d 45%, #0a1f16 100%);
+    -fx-font-family: "Showcard Gothic", "Copperplate", "Arial Black", "Arial";
+}
+.title {
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+    -fx-text-fill: gold;
+    -fx-effect: dropshadow(gaussian, black, 8, 0.5, 0, 0);
+}
+.balance { -fx-font-size: 18px; -fx-text-fill: #6bffb5; }
+.status { -fx-font-size: 16px; -fx-text-fill: #c9ffe6; }
+.reels .reel { -fx-background-color: #153e2a; -fx-text-fill: #d8ffe6; -fx-padding: 18px; -fx-font-size: 24px; -fx-background-radius: 10; }
+.card { -fx-background-color: rgba(107,255,181,0.08); -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 12, 0, 0, 4); }
+.button { -fx-font-weight: bold; }
