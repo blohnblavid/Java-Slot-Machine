@@ -2,7 +2,7 @@ import java.security.SecureRandom;
 import java.util.*;
 import javax.swing.*;
 
-public class SlotMachineTier1 {
+public class SlotMachine {
 
     static class Symbol {
         final String name;
@@ -18,10 +18,17 @@ public class SlotMachineTier1 {
             this.weight = weight;
             this.payout3 = payout3;
             if (iconPath != null) {
-                this.icon = new ImageIcon(getClass().getResource(iconPath));
-            } else {
-                this.icon = null;
-            }
+                    java.net.URL url = getClass().getResource(iconPath);
+                    if (url != null) {
+                        this.icon = new ImageIcon(url);
+                    } else {
+                        // fallback to a blank image in resources
+                        java.net.URL blank = getClass().getResource("/resources/images/blank.png");
+                        this.icon = blank != null ? new ImageIcon(blank) : new ImageIcon();
+                    }
+                } else {
+                    this.icon = null;
+                }
         }
 
         // Original constructor for console-only use
@@ -77,10 +84,10 @@ public class SlotMachineTier1 {
         }
     }
 
-    static class SlotMachine {
+    static class SlotRoll {
         private final Reel[] reels;
 
-        SlotMachine(Reel... reels) {
+        SlotRoll(Reel... reels) {
             this.reels = reels;
         }
 
@@ -112,7 +119,7 @@ public class SlotMachineTier1 {
         Reel r1 = new Reel(symbols, rng);
         Reel r2 = new Reel(symbols, rng);
         Reel r3 = new Reel(symbols, rng);
-        SlotMachine sm = new SlotMachine(r1, r2, r3);
+        SlotRoll sm = new SlotRoll(r1, r2, r3);
 
         Bank bank = new Bank(200);
         List<Symbol> outcome = new ArrayList<>(3);
@@ -172,25 +179,11 @@ public class SlotMachineTier1 {
                     wins++;
                     if (win > biggestWin) biggestWin = win;
                 } else {
-                    System.out.println("no win, rip.");
+                    System.out.println("no win :(.");
                     losses++;
                 }
                 System.out.println("Balance: " + bank.credits);
             }
         }
-
-        // Final summary
-        System.out.println("\n=== Session Summary ===");
-        System.out.println("Total spins: " + spins);
-        System.out.println("Wins: " + wins);
-        System.out.println("Losses: " + losses);
-        if (spins > 0) {
-            double winRate = (wins * 100.0) / spins;
-            System.out.printf("Win rate: %.2f%%\n", winRate);
-        }
-        System.out.println("Biggest single win: " + biggestWin + " credits");
-        System.out.println("Number of resets: " + resets);
-        System.out.println("Final balance: " + bank.credits + " credits");
-        System.out.println("Thanks for playing!");
     }
 }
